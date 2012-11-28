@@ -15,7 +15,7 @@
 		79AA01781552BA61003F5640 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA01741552BA61003F5640 /* FlashRuntimeExtensions.h */; };
 		79AA01791552BA61003F5640 /* KeychainFRETypeConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */; };
 		79AA017E1552C549003F5640 /* KeychainAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA017C1552C549003F5640 /* KeychainAccessor.h */; };
-		79AA017F1552C549003F5640 /* KeychainAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AA017D1552C549003F5640 /* KeychainAccessor.m */; };
+		B241EFDB164175B900789849 /* KeychainAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B241EFDA164175B900789849 /* KeychainAccessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		79AA01741552BA61003F5640 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 		79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainFRETypeConversion.h; sourceTree = "<group>"; };
 		79AA017C1552C549003F5640 /* KeychainAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainAccessor.h; sourceTree = "<group>"; };
-		79AA017D1552C549003F5640 /* KeychainAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainAccessor.m; sourceTree = "<group>"; };
+		B241EFDA164175B900789849 /* KeychainAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainAccessor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +50,8 @@
 				79AA016D1552B983003F5640 /* KeychainIosExtension-Prefix.pch */,
 				79AA01741552BA61003F5640 /* FlashRuntimeExtensions.h */,
 				79AA017C1552C549003F5640 /* KeychainAccessor.h */,
-				79AA017D1552C549003F5640 /* KeychainAccessor.m */,
 				79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */,
+				B241EFDA164175B900789849 /* KeychainAccessor.m */,
 				79099AD615E3C755002CD0DC /* KeychainFRETypeConversion.m */,
 				79AA016E1552B983003F5640 /* KeychainIosExtension.m */,
 				79AA015F1552B7AF003F5640 /* Frameworks */,
@@ -142,8 +142,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				79AA01701552B983003F5640 /* KeychainIosExtension.m in Sources */,
-				79AA017F1552C549003F5640 /* KeychainAccessor.m in Sources */,
 				79099AD715E3C755002CD0DC /* KeychainFRETypeConversion.m in Sources */,
+				B241EFDB164175B900789849 /* KeychainAccessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

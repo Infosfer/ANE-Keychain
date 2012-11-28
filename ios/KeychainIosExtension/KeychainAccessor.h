@@ -9,16 +9,16 @@
 
 @interface KeychainAccessor : NSObject
 
--(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key;
--(OSStatus)updateObject:(NSString *)obj forKey:(NSString *)key;
--(OSStatus)insertOrUpdateObject:(NSString *)obj forKey:(NSString *)key;
--(NSString *)objectForKey:(NSString *)key;
--(OSStatus)deleteObjectForKey:(NSString *)key;
+-(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
+-(OSStatus)updateObject:(NSString *)obj forKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
+-(OSStatus)insertOrUpdateObject:(NSString *)obj forKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
+-(NSString *)objectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
+-(OSStatus)deleteObjectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
 
--(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key withAccessGroup:(NSString*)accessGroup;
--(OSStatus)updateObject:(NSString *)obj forKey:(NSString *)key withAccessGroup:(NSString*)accessGroup;
--(OSStatus)insertOrUpdateObject:(NSString *)obj forKey:(NSString *)key withAccessGroup:(NSString*)accessGroup;
--(NSString *)objectForKey:(NSString *)key withAccessGroup:(NSString*)accessGroup;
--(OSStatus)deleteObjectForKey:(NSString *)key withAccessGroup:(NSString*)accessGroup;
+-(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
+-(OSStatus)updateObject:(NSString *)obj forKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
+-(OSStatus)insertOrUpdateObject:(NSString *)obj forKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
+-(NSString *)objectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
+-(OSStatus)deleteObjectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
 
 @end

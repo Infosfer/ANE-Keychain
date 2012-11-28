@@ -25,17 +25,20 @@ DEFINE_ANE_FUNCTION( insertStringInKeychain )
     NSString* value;
     if( keychain_FREGetObjectAsString( argv[1], &value ) != FRE_OK ) return NULL;
     
+    NSString* kSecAttrAccessibleType;
+    if( keychain_FREGetObjectAsString( argv[2], &kSecAttrAccessibleType ) != FRE_OK ) return NULL;
+    
     OSStatus status;
     
-    if( argc >= 3 )
+    if( argc >= 4 )
     {
         NSString* accessGroup;
-        if( keychain_FREGetObjectAsString( argv[2], &accessGroup ) != FRE_OK ) return NULL;
-        status = [keychainAccessor insertObject:value forKey:key withAccessGroup:accessGroup];
+        if( keychain_FREGetObjectAsString( argv[3], &accessGroup ) != FRE_OK ) return NULL;
+        status = [keychainAccessor insertObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType withAccessGroup:accessGroup];
     }
     else
     {
-        status = [keychainAccessor insertObject:value forKey:key];
+        status = [keychainAccessor insertObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
     }
     
     FREObject result;
@@ -54,16 +57,19 @@ DEFINE_ANE_FUNCTION( updateStringInKeychain )
     NSString* value;
     if( keychain_FREGetObjectAsString( argv[1], &value ) != FRE_OK ) return NULL;
     
+    NSString* kSecAttrAccessibleType;
+    if( keychain_FREGetObjectAsString( argv[2], &kSecAttrAccessibleType ) != FRE_OK ) return NULL;
+    
     OSStatus status;
-    if( argc >= 3 )
+    if( argc >= 4 )
     {
         NSString* accessGroup;
-        if( keychain_FREGetObjectAsString( argv[2], &accessGroup ) != FRE_OK ) return NULL;
-        status = [keychainAccessor updateObject:value forKey:key withAccessGroup:accessGroup];
+        if( keychain_FREGetObjectAsString( argv[3], &accessGroup ) != FRE_OK ) return NULL;
+        status = [keychainAccessor updateObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType withAccessGroup:accessGroup];
     }
     else
     {
-        status = [keychainAccessor updateObject:value forKey:key];
+        status = [keychainAccessor updateObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
     }
     
     FREObject result;
@@ -82,16 +88,19 @@ DEFINE_ANE_FUNCTION( insertOrUpdateStringInKeychain )
     NSString* value;
     if( keychain_FREGetObjectAsString( argv[1], &value ) != FRE_OK ) return NULL;
     
+    NSString* kSecAttrAccessibleType;
+    if( keychain_FREGetObjectAsString( argv[2], &kSecAttrAccessibleType ) != FRE_OK ) return NULL;
+    
     OSStatus status;
-    if( argc >= 3 )
+    if( argc >= 4 )
     {
         NSString* accessGroup;
-        if( keychain_FREGetObjectAsString( argv[2], &accessGroup ) != FRE_OK ) return NULL;
-        status = [keychainAccessor insertOrUpdateObject:value forKey:key withAccessGroup:accessGroup];
+        if( keychain_FREGetObjectAsString( argv[3], &accessGroup ) != FRE_OK ) return NULL;
+        status = [keychainAccessor insertOrUpdateObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType withAccessGroup:accessGroup];
     }
     else
     {
-        status = [keychainAccessor insertOrUpdateObject:value forKey:key];
+        status = [keychainAccessor insertOrUpdateObject:value forKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
     }
     
     FREObject result;
@@ -107,16 +116,19 @@ DEFINE_ANE_FUNCTION( fetchStringFromKeychain )
     NSString* key;
     if( keychain_FREGetObjectAsString( argv[0], &key ) != FRE_OK ) return NULL;
     
+    NSString* kSecAttrAccessibleType;
+    if( keychain_FREGetObjectAsString( argv[1], &kSecAttrAccessibleType ) != FRE_OK ) return NULL;
+    
     NSString* value;
-    if( argc >= 2 )
+    if( argc >= 3 )
     {
         NSString* accessGroup;
-        if( keychain_FREGetObjectAsString( argv[1], &accessGroup ) != FRE_OK ) return NULL;
-        value = [keychainAccessor objectForKey:key withAccessGroup:accessGroup];
+        if( keychain_FREGetObjectAsString( argv[2], &accessGroup ) != FRE_OK ) return NULL;
+        value = [keychainAccessor objectForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType withAccessGroup:accessGroup];
     }
     else
     {
-        value = [keychainAccessor objectForKey:key];
+        value = [keychainAccessor objectForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
     }
 
     if( value == nil )
@@ -137,16 +149,19 @@ DEFINE_ANE_FUNCTION( deleteStringFromKeychain )
     NSString* key;
     if( keychain_FREGetObjectAsString( argv[0], &key ) != FRE_OK ) return NULL;
     
+    NSString* kSecAttrAccessibleType;
+    if( keychain_FREGetObjectAsString( argv[1], &kSecAttrAccessibleType ) != FRE_OK ) return NULL;
+    
     OSStatus status;
-    if( argc >= 2 )
+    if( argc >= 3 )
     {
         NSString* accessGroup;
-        if( keychain_FREGetObjectAsString( argv[1], &accessGroup ) != FRE_OK ) return NULL;
-        status = [keychainAccessor deleteObjectForKey:key withAccessGroup:accessGroup];
+        if( keychain_FREGetObjectAsString( argv[2], &accessGroup ) != FRE_OK ) return NULL;
+        status = [keychainAccessor deleteObjectForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType withAccessGroup:accessGroup];
     }
     else
     {
-        status = [keychainAccessor deleteObjectForKey:key];
+        status = [keychainAccessor deleteObjectForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
     }
     
     FREObject result;

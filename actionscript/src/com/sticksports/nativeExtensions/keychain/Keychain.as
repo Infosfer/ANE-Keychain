@@ -14,68 +14,68 @@ package com.sticksports.nativeExtensions.keychain
 			}
 		}
 
-		public static function get( key : String, accessGroup : String = null ) : String
+		public static function get( key : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : String
 		{
 			init();
 			if( accessGroup )
 			{
-				return extensionContext.call( NativeMethods.fetchString, key, accessGroup ) as String;
+				return extensionContext.call( NativeMethods.fetchString, key, kSecAttrAccessibleType, accessGroup ) as String;
 			}
 			else
 			{
-				return extensionContext.call( NativeMethods.fetchString, key ) as String;
+				return extensionContext.call( NativeMethods.fetchString, key, kSecAttrAccessibleType ) as String;
 			}
 		}
 
-		public static function insert( key : String, value : String, accessGroup : String = null ) : int
+		public static function insert( key : String, value : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : int
 		{
 			init();
 			if( accessGroup )
 			{
-				return extensionContext.call( NativeMethods.insertString, key, value, accessGroup ) as int;
+				return extensionContext.call( NativeMethods.insertString, key, value, kSecAttrAccessibleType, accessGroup ) as int;
 			}
 			else
 			{
-				return extensionContext.call( NativeMethods.insertString, key, value ) as int;
+				return extensionContext.call( NativeMethods.insertString, key, value, kSecAttrAccessibleType ) as int;
 			}
 		}
 
-		public static function update( key : String, value : String, accessGroup : String = null ) : int
+		public static function update( key : String, value : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : int
 		{
 			init();
 			if( accessGroup )
 			{
-				return extensionContext.call( NativeMethods.updateString, key, value, accessGroup ) as int;
+				return extensionContext.call( NativeMethods.updateString, key, value, kSecAttrAccessibleType, accessGroup ) as int;
 			}
 			else
 			{
-				return extensionContext.call( NativeMethods.updateString, key, value ) as int;
+				return extensionContext.call( NativeMethods.updateString, key, value, kSecAttrAccessibleType ) as int;
 			}
 		}
 
-		public static function insertOrUpdate( key : String, value : String, accessGroup : String = null ) : int
+		public static function insertOrUpdate( key : String, value : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : int
 		{
 			init();
 			if( accessGroup )
 			{
-				return extensionContext.call( NativeMethods.insertOrUpdateString, key, value, accessGroup ) as int;
+				return extensionContext.call( NativeMethods.insertOrUpdateString, key, value, kSecAttrAccessibleType, accessGroup ) as int;
 			}
 			else
 			{
-				return extensionContext.call( NativeMethods.insertOrUpdateString, key, value ) as int;
+				return extensionContext.call( NativeMethods.insertOrUpdateString, key, value, kSecAttrAccessibleType ) as int;
 			}
 		}
 
-		public static function remove( key : String, accessGroup : String = null ) : int
+		public static function remove( key : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : int
 		{
 			init();
 			if( accessGroup )
 			{
-				return extensionContext.call( NativeMethods.deleteString, key, accessGroup ) as int;
+				return extensionContext.call( NativeMethods.deleteString, key, kSecAttrAccessibleType, accessGroup ) as int;
 			}
 			else
 			{
-				return extensionContext.call( NativeMethods.deleteString, key ) as int;
+				return extensionContext.call( NativeMethods.deleteString, key, kSecAttrAccessibleType ) as int;
 			}
 		}
 	}
