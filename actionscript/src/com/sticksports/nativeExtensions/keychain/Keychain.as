@@ -27,6 +27,12 @@ package com.sticksports.nativeExtensions.keychain
 			}
 		}
 
+		public static function getUserLanguageAndLocale() : String
+		{
+			init();
+			return extensionContext.call("getUserLanguageAndLocale") as String;
+		}
+
 		public static function insert( key : String, value : String, kSecAttrAccessibleType:String, accessGroup : String = null ) : int
 		{
 			init();

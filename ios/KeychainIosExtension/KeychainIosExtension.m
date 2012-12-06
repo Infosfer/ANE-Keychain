@@ -144,6 +144,21 @@ DEFINE_ANE_FUNCTION( fetchStringFromKeychain )
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION( getUserLanguageAndLocale )
+{
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
+    NSString *value = [NSString stringWithFormat:@"%@_%@", language, countryCode];
+
+    FREObject asValue;
+    if ( keychain_FRENewObjectFromString( value, &asValue ) == FRE_OK )
+    {
+        return asValue;
+    }
+    return NULL;
+}
+
 DEFINE_ANE_FUNCTION( deleteStringFromKeychain )
 {
     NSString* key;
@@ -180,6 +195,7 @@ void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREConte
         MAP_FUNCTION( updateStringInKeychain, NULL ),
         MAP_FUNCTION( insertOrUpdateStringInKeychain, NULL ),
         MAP_FUNCTION( fetchStringFromKeychain, NULL ),
+        MAP_FUNCTION( getUserLanguageAndLocale, NULL ),
         MAP_FUNCTION( deleteStringFromKeychain, NULL )
     };
     
