@@ -10,29 +10,29 @@
 
 @implementation KeychainAccessor
 
--(NSMutableDictionary*)queryDictionaryForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType
+-(NSMutableDictionary*)queryDictionaryForKey:(NSString*)key kSecAttrAccessibleTypeValue:(NSString*)kSecAttrAccessibleTypeValue
 {
     NSMutableDictionary* query = [NSMutableDictionary dictionary];
     
     [query setObject:(id)kSecClassGenericPassword  forKey:(id)kSecClass];
     
-    if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleWhenUnlocked"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleWhenUnlocked];
+    if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleWhenUnlocked"]) {
+        [query setObject:(id)kSecAttrAccessibleWhenUnlocked forKey:(id)kSecAttrAccessible];
     }
-    else if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleAfterFirstUnlock"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleAfterFirstUnlock];
+    else if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleAfterFirstUnlock"]) {
+        [query setObject:(id)kSecAttrAccessibleAfterFirstUnlock forKey:(id)kSecAttrAccessible];
     }
-    else if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleAlways"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleAlways];
+    else if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleAlways"]) {
+        [query setObject:(id)kSecAttrAccessibleAlways forKey:(id)kSecAttrAccessible];
     }
-    else if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleWhenUnlockedThisDeviceOnly"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly];
+    else if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleWhenUnlockedThisDeviceOnly"]) {
+        [query setObject:(id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly forKey:(id)kSecAttrAccessible];
     }
-    else if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly];
+    else if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly"]) {
+        [query setObject:(id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly forKey:(id)kSecAttrAccessible];
     }
-    else if ([kSecAttrAccessibleType isEqualToString:@"kSecAttrAccessibleAlwaysThisDeviceOnly"]) {
-        [query setObject:(id)kSecAttrAccessibleType forKey:(id)kSecAttrAccessibleAlwaysThisDeviceOnly];
+    else if ([kSecAttrAccessibleTypeValue isEqualToString:@"kSecAttrAccessibleAlwaysThisDeviceOnly"]) {
+        [query setObject:(id)kSecAttrAccessibleAlwaysThisDeviceOnly forKey:(id)kSecAttrAccessible];
     }
     
     [query setObject:key forKey:(id)kSecAttrService];
@@ -40,16 +40,16 @@
     return query;
 }
 
--(NSMutableDictionary*)queryDictionaryForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType accessGroup:(NSString*)accessGroup
+-(NSMutableDictionary*)queryDictionaryForKey:(NSString*)key kSecAttrAccessibleTypeValue:(NSString*)kSecAttrAccessibleTypeValue accessGroup:(NSString*)accessGroup
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleTypeValue];
     [query setObject:accessGroup forKey:(id)kSecAttrAccessGroup];
     return query;
 }
 
 -(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType];
     
     [query setObject:[obj dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
     
@@ -58,7 +58,7 @@
 
 -(OSStatus)updateObject:(NSString*)obj forKey:(NSString*) key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType];
     
     NSMutableDictionary* change = [NSMutableDictionary dictionary];
     [change setObject:[obj dataUsingEncoding:NSUTF8StringEncoding] forKey:(id) kSecValueData];
@@ -78,7 +78,7 @@
 
 -(NSString*)objectForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType];
     [query setObject:(id) kCFBooleanTrue forKey:(id) kSecReturnData];
     
     NSData* data = nil;
@@ -95,13 +95,13 @@
 
 -(OSStatus)deleteObjectForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType];
     return SecItemDelete( (CFDictionaryRef) query );
 }
 
 -(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType accessGroup:accessGroup];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType accessGroup:accessGroup];
     
     [query setObject:[obj dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
     
@@ -110,7 +110,7 @@
 
 -(OSStatus)updateObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType accessGroup:accessGroup];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType accessGroup:accessGroup];
     
     NSMutableDictionary* change = [NSMutableDictionary dictionary];
     [change setObject:[obj dataUsingEncoding:NSUTF8StringEncoding] forKey:(id) kSecValueData];
@@ -130,7 +130,7 @@
 
 -(NSString*)objectForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType accessGroup:accessGroup];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType accessGroup:accessGroup];
     [query setObject:(id) kCFBooleanTrue forKey:(id) kSecReturnData];
     
     NSData* data = nil;
@@ -147,7 +147,7 @@
 
 -(OSStatus)deleteObjectForKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup
 {
-    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleType:kSecAttrAccessibleType accessGroup:accessGroup];
+    NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType accessGroup:accessGroup];
     return SecItemDelete( (CFDictionaryRef) query );
 }
 @end
