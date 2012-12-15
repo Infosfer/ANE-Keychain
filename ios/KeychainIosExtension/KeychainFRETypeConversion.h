@@ -12,7 +12,9 @@
 #import "FlashRuntimeExtensions.h"
 
 FREResult keychain_FREGetObjectAsString( FREObject object, NSString** value );
-
+FREResult keychain_FREGetObjectAsInt( FREObject object, int* value );
+FREResult keychain_FREGetObjectAsFloat( FREObject object, float* value );
+FREResult keychain_FREGetObjectAsBool( FREObject object, BOOL* value );
 FREResult keychain_FRENewObjectFromString( NSString* string, FREObject* asString );
 
 #endif

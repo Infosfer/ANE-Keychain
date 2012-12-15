@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		79099AD715E3C755002CD0DC /* KeychainFRETypeConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 79099AD615E3C755002CD0DC /* KeychainFRETypeConversion.m */; };
-		79AA01611552B7AF003F5640 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AA01601552B7AF003F5640 /* Foundation.framework */; };
 		79AA016F1552B983003F5640 /* KeychainIosExtension-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 79AA016D1552B983003F5640 /* KeychainIosExtension-Prefix.pch */; };
 		79AA01701552B983003F5640 /* KeychainIosExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AA016E1552B983003F5640 /* KeychainIosExtension.m */; };
 		79AA01731552BA03003F5640 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AA01711552B9D0003F5640 /* Security.framework */; };
@@ -16,12 +15,16 @@
 		79AA01791552BA61003F5640 /* KeychainFRETypeConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */; };
 		79AA017E1552C549003F5640 /* KeychainAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA017C1552C549003F5640 /* KeychainAccessor.h */; };
 		B241EFDB164175B900789849 /* KeychainAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B241EFDA164175B900789849 /* KeychainAccessor.m */; };
+		B27D0351167B77D7004DDA44 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0350167B77D7004DDA44 /* CoreTelephony.framework */; };
+		B27D0355167B77F2004DDA44 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0352167B77F2004DDA44 /* AdSupport.framework */; };
+		B27D0356167B77F2004DDA44 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */; };
+		B27D0357167B77F2004DDA44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */; };
+		B27D0359167B8B06004DDA44 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		79099AD615E3C755002CD0DC /* KeychainFRETypeConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainFRETypeConversion.m; sourceTree = "<group>"; };
 		79AA015D1552B7AF003F5640 /* libKeychainIosExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKeychainIosExtension.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		79AA01601552B7AF003F5640 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		79AA016D1552B983003F5640 /* KeychainIosExtension-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KeychainIosExtension-Prefix.pch"; sourceTree = "<group>"; };
 		79AA016E1552B983003F5640 /* KeychainIosExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainIosExtension.m; sourceTree = "<group>"; };
 		79AA01711552B9D0003F5640 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -29,6 +32,11 @@
 		79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainFRETypeConversion.h; sourceTree = "<group>"; };
 		79AA017C1552C549003F5640 /* KeychainAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainAccessor.h; sourceTree = "<group>"; };
 		B241EFDA164175B900789849 /* KeychainAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainAccessor.m; sourceTree = "<group>"; };
+		B27D0350167B77D7004DDA44 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B27D0352167B77F2004DDA44 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileAppTracker.framework; path = "../../../MobileAppTracking-ios/MobileAppTracker.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79AA01611552B7AF003F5640 /* Foundation.framework in Frameworks */,
+				B27D0359167B8B06004DDA44 /* MobileAppTracker.framework in Frameworks */,
+				B27D0355167B77F2004DDA44 /* AdSupport.framework in Frameworks */,
+				B27D0356167B77F2004DDA44 /* MobileCoreServices.framework in Frameworks */,
+				B27D0357167B77F2004DDA44 /* SystemConfiguration.framework in Frameworks */,
+				B27D0351167B77D7004DDA44 /* CoreTelephony.framework in Frameworks */,
 				79AA01731552BA03003F5640 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +59,11 @@
 		79AA01521552B7AE003F5640 = {
 			isa = PBXGroup;
 			children = (
+				B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */,
+				B27D0352167B77F2004DDA44 /* AdSupport.framework */,
+				B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */,
+				B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */,
+				B27D0350167B77D7004DDA44 /* CoreTelephony.framework */,
 				79AA016D1552B983003F5640 /* KeychainIosExtension-Prefix.pch */,
 				79AA01741552BA61003F5640 /* FlashRuntimeExtensions.h */,
 				79AA017C1552C549003F5640 /* KeychainAccessor.h */,
@@ -71,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				79AA01711552B9D0003F5640 /* Security.framework */,
-				79AA01601552B7AF003F5640 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,8 +214,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/KeychainIosExtension.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../MobileAppTracking-ios\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeychainIosExtension-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -211,8 +237,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/KeychainIosExtension.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../MobileAppTracking-ios\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeychainIosExtension-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

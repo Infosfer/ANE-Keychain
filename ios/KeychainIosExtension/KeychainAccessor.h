@@ -21,4 +21,17 @@
 -(NSString *)objectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
 -(OSStatus)deleteObjectForKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType withAccessGroup:(NSString*)accessGroup;
 
+-(NSString *)mobileAppTrackerInitialize:(NSString*)advertiserId appkey:(NSString *)appKey userId:(NSString *)userId;
+-(void)mobileAppTrackerTrackInstall;
+-(void)mobileAppTrackerTrackUpdate;
+-(void)mobileAppTrackerTrackOpen;
+-(void)mobileAppTrackerTrackClose;
+-(void)mobileAppTrackerTrackInAppPurchase:(NSString *)localizedTitle
+                             currencyCode:(NSString *)currencyCode
+                                unitPrice:(float)unitPrice
+                                 quantity:(int)quantity
+                             extraRevenue:(float)extraRevenue
+                    transactionIdentifier:(NSString *)transactionIdentifier
+                                isSuccess:(int)isSuccess;
+
 @end

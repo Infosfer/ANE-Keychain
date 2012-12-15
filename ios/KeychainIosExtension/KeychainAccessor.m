@@ -7,6 +7,9 @@
 //
 
 #import "KeychainAccessor.h"
+#import <MobileAppTracker/MobileAppTracker.h>
+#import <UIKit/UIDevice.h>
+#import <StoreKit/SKPaymentTransaction.h>
 
 @implementation KeychainAccessor
 
@@ -150,4 +153,80 @@
     NSMutableDictionary* query = [self queryDictionaryForKey:key kSecAttrAccessibleTypeValue:kSecAttrAccessibleType accessGroup:accessGroup];
     return SecItemDelete( (CFDictionaryRef) query );
 }
+
+-(NSString *)mobileAppTrackerInitialize:(NSString*)advertiserId appkey:(NSString *)appKey userId:(NSString *)userId
+{
+    NSError *error = nil;
+    BOOL success = [[MobileAppTracker sharedManager] startTrackerWithAdvertiserId:advertiserId advertiserKey:appKey withError:&error];
+    
+    if (success) {
+        /*if (isDebug) */{
+            [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:YES];
+            [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:YES];
+        }
+        
+        if (userId != nil) {
+            [[MobileAppTracker sharedManager] setUserId:userId];
+        }
+      
+        /*
+        if (useUniqueIdentifier) {
+            [[MobileAppTracker sharedManager] setDeviceId:[[UIDevice currentDevice] uniqueIdentifier]];
+        }
+         */
+        
+        
+        return @"7";
+    }
+    else {
+        return [error localizedDescription];
+    }
+}
+
+-(void)mobileAppTrackerTrackInstall {
+    [[MobileAppTracker sharedManager] trackInstall];
+}
+
+-(void)mobileAppTrackerTrackUpdate {
+    [[MobileAppTracker sharedManager] trackUpdate];
+}
+
+-(void)mobileAppTrackerTrackOpen {
+    [[MobileAppTracker sharedManager] trackActionForEventIdOrName:@"open" eventIsId:NO];
+}
+
+-(void)mobileAppTrackerTrackClose {
+    [[MobileAppTracker sharedManager] trackActionForEventIdOrName:@"close" eventIsId:NO];
+}
+
+-(void)mobileAppTrackerTrackInAppPurchase:(NSString *)localizedTitle
+    currencyCode:(NSString *)currencyCode
+    unitPrice:(float)unitPrice
+    quantity:(int)quantity
+    extraRevenue:(float)extraRevenue
+    transactionIdentifier:(NSString *)transactionIdentifier
+    isSuccess:(int)isSuccess
+{
+    float revenue = unitPrice * quantity;
+ 
+    NSDictionary *dictItem = @{
+    @"item" : localizedTitle,
+    @"unit_price" : [NSString stringWithFormat:@"%f", unitPrice],
+    @"quantity" : [NSString stringWithFormat:@"%d", quantity],
+    @"revenue" : [NSString stringWithFormat:@"%f", revenue]
+    };
+    
+    NSArray *arrEventItems = @[ dictItem ];
+
+    [[MobileAppTracker sharedManager]
+        trackActionForEventIdOrName:@"purchase"
+        eventIsId:NO
+        eventItems:arrEventItems
+        referenceId:transactionIdentifier
+        revenueAmount:extraRevenue
+        currencyCode:currencyCode
+        transactionState:(isSuccess) ? SKPaymentTransactionStatePurchased : SKPaymentTransactionStateFailed
+    ];
+}
+
 @end

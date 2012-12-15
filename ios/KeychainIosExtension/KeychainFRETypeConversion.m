@@ -21,6 +21,29 @@ FREResult keychain_FREGetObjectAsString( FREObject object, NSString** value )
     return FRE_OK;
 }
 
+FREResult keychain_FREGetObjectAsInt( FREObject object, int* value )
+{
+    FREResult result;
+    
+    result = FREGetObjectAsInt32(object, value);
+    if( result != FRE_OK ) return result;
+    
+    return FRE_OK;
+}
+
+FREResult keychain_FREGetObjectAsFloat( FREObject object, float* value )
+{
+    FREResult result;
+    double valueAsDouble;
+    
+    result = FREGetObjectAsDouble(object, &valueAsDouble);
+    if( result != FRE_OK ) return result;
+    
+    *value = (float)valueAsDouble;
+    
+    return FRE_OK;
+}
+
 FREResult keychain_FRENewObjectFromString( NSString* string, FREObject* asString )
 {
     const char* utf8String = string.UTF8String;
