@@ -157,9 +157,9 @@
 -(NSString *)mobileAppTrackerInitialize:(NSString*)advertiserId appkey:(NSString *)appKey userId:(NSString *)userId
 {
     NSError *error = nil;
-    BOOL success = [[MobileAppTracker sharedManager] startTrackerWithAdvertiserId:advertiserId advertiserKey:appKey withError:&error];
+    BOOL isError = [[MobileAppTracker sharedManager] startTrackerWithAdvertiserId:advertiserId advertiserKey:appKey withError:&error];
     
-    if (success) {
+    if (isError) {
         /*if (isDebug) */{
             [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:YES];
             [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:YES];
@@ -176,7 +176,7 @@
          */
         
         
-        return @"7";
+        return @"";
     }
     else {
         return [error localizedDescription];

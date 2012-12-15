@@ -188,34 +188,26 @@ DEFINE_ANE_FUNCTION( getUserLanguageAndLocale )
 
 DEFINE_ANE_FUNCTION( mobileAppTrackerInitialize )
 {
-    FREObject result;
-    
     NSString* advertiserId;
-    if( keychain_FREGetObjectAsString( argv[0], &advertiserId ) != FRE_OK ) {
-        keychain_FRENewObjectFromString( @"1", &result );
-        return result;
-    }
+    if( keychain_FREGetObjectAsString( argv[0], &advertiserId ) != FRE_OK ) return NULL;
     
     NSString* appkey;
-    if( keychain_FREGetObjectAsString( argv[1], &appkey ) != FRE_OK ) {
-        keychain_FRENewObjectFromString( @"2", &result );
-        return result;
-    }
+    if( keychain_FREGetObjectAsString( argv[1], &appkey ) != FRE_OK ) return NULL;
     
     NSString* userId;
-    if( keychain_FREGetObjectAsString( argv[2], &userId ) != FRE_OK ) {
-        keychain_FRENewObjectFromString( @"4", &result );
-        return result;
-    }
+    if( keychain_FREGetObjectAsString( argv[2], &userId ) != FRE_OK ) return NULL;
 
-    NSString *error = [keychainAccessor mobileAppTrackerInitialize:advertiserId appkey:appkey userId:userId];
+    NSString *error;
     
+    error = [keychainAccessor mobileAppTrackerInitialize:advertiserId appkey:appkey userId:userId];
+    
+    FREObject result;
     if (keychain_FRENewObjectFromString( error, &result ) == FRE_OK )
     {
         return result;
     }
     
-    return (id)6;
+    return NULL;
 }
 
 DEFINE_ANE_FUNCTION(mobileAppTrackerTrackInstall)

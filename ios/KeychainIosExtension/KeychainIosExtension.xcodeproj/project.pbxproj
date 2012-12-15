@@ -16,10 +16,10 @@
 		79AA017E1552C549003F5640 /* KeychainAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AA017C1552C549003F5640 /* KeychainAccessor.h */; };
 		B241EFDB164175B900789849 /* KeychainAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B241EFDA164175B900789849 /* KeychainAccessor.m */; };
 		B27D0351167B77D7004DDA44 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0350167B77D7004DDA44 /* CoreTelephony.framework */; };
-		B27D0355167B77F2004DDA44 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0352167B77F2004DDA44 /* AdSupport.framework */; };
 		B27D0356167B77F2004DDA44 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */; };
 		B27D0357167B77F2004DDA44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */; };
-		B27D0359167B8B06004DDA44 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */; };
+		B2C9225E167D36F900002492 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C9225D167D36F900002492 /* AdSupport.framework */; };
+		B2C92260167D370800002492 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C9225F167D370800002492 /* MobileAppTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +33,10 @@
 		79AA017C1552C549003F5640 /* KeychainAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainAccessor.h; sourceTree = "<group>"; };
 		B241EFDA164175B900789849 /* KeychainAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainAccessor.m; sourceTree = "<group>"; };
 		B27D0350167B77D7004DDA44 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		B27D0352167B77F2004DDA44 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileAppTracker.framework; path = "../../../MobileAppTracking-ios/MobileAppTracker.framework"; sourceTree = "<group>"; };
+		B2C9225D167D36F900002492 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B2C9225F167D370800002492 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +44,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B27D0359167B8B06004DDA44 /* MobileAppTracker.framework in Frameworks */,
-				B27D0355167B77F2004DDA44 /* AdSupport.framework in Frameworks */,
+				B2C92260167D370800002492 /* MobileAppTracker.framework in Frameworks */,
+				B2C9225E167D36F900002492 /* AdSupport.framework in Frameworks */,
 				B27D0356167B77F2004DDA44 /* MobileCoreServices.framework in Frameworks */,
 				B27D0357167B77F2004DDA44 /* SystemConfiguration.framework in Frameworks */,
 				B27D0351167B77D7004DDA44 /* CoreTelephony.framework in Frameworks */,
@@ -59,8 +59,8 @@
 		79AA01521552B7AE003F5640 = {
 			isa = PBXGroup;
 			children = (
-				B27D0358167B8B06004DDA44 /* MobileAppTracker.framework */,
-				B27D0352167B77F2004DDA44 /* AdSupport.framework */,
+				B2C9225F167D370800002492 /* MobileAppTracker.framework */,
+				B2C9225D167D36F900002492 /* AdSupport.framework */,
 				B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */,
 				B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */,
 				B27D0350167B77D7004DDA44 /* CoreTelephony.framework */,
