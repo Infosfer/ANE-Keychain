@@ -159,7 +159,7 @@
     NSError *error = nil;
     BOOL isError = [[MobileAppTracker sharedManager] startTrackerWithAdvertiserId:advertiserId advertiserKey:appKey withError:&error];
     
-    if (isError) {
+    if (!isError) {
         /*if (isDebug) */{
             [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:YES];
             [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:YES];
