@@ -161,8 +161,8 @@
     
     if (!isError) {
         /*if (isDebug) */{
-            [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:YES];
-            [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:YES];
+            [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:NO];
+            [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:NO];
         }
         
         if (userId != nil) {
