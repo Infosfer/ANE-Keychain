@@ -1,16 +1,19 @@
 package com.sticksports.nativeExtensions.keychain
 {
 	import flash.external.ExtensionContext;
+	import flash.events.StatusEvent;
 
 	public class Keychain
 	{
 		private static var extensionContext : ExtensionContext;
-		
+		private static var _twitterCallback : Function;
+
 		private static function init() : void
 		{
 			if ( !extensionContext )
 			{
 				extensionContext = ExtensionContext.createExtensionContext( "com.sticksports.nativeExtensions.Keychain", null );
+				extensionContext.addEventListener(StatusEvent.STATUS, onStatus);				
 			}
 		}
 
@@ -127,5 +130,30 @@ package com.sticksports.nativeExtensions.keychain
 			
 			return 1;
 		}
+
+		public static function sendTweet( message : String, cb : Function) : void
+		{
+			init();
+			_twitterCallback = cb;
+			extensionContext.call("sendTweet", message);
+		}
+
+		public static function canSendTweet() : Boolean
+		{
+			init();
+			return extensionContext.call("canSendTweet") as Boolean;
+		}
+
+		private static function onStatus( event : StatusEvent ) : void
+		{
+			if (event.code.indexOf("CANCEL") != -1) // If the event code contains SESSION, it's an open/reauthorize session result
+			{
+				_twitterCallback("CANCEL");
+			}
+			else if (event.code == "DONE") // Simple log message
+			{
+				_twitterCallback("DONE");
+			}
+		}		
 	}
 }

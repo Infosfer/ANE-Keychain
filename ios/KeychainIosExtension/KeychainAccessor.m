@@ -160,10 +160,10 @@
     BOOL isError = [[MobileAppTracker sharedManager] startTrackerWithAdvertiserId:advertiserId advertiserKey:appKey withError:&error];
     
     if (!isError) {
-        /*if (isDebug) */{
+        /*if (isDebug) {
             [[MobileAppTracker sharedManager] setShouldDebugResponseFromServer:NO];
             [[MobileAppTracker sharedManager] setShouldAllowDuplicateRequests:NO];
-        }
+        }*/
         
         if (userId != nil) {
             [[MobileAppTracker sharedManager] setUserId:userId];

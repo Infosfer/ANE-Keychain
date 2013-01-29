@@ -9,12 +9,15 @@
 #import "FlashRuntimeExtensions.h"
 #import "KeychainFRETypeConversion.h"
 #import "KeychainAccessor.h"
+#import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
 
 #define DEFINE_ANE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 
 #define MAP_FUNCTION(fn, data) { (const uint8_t*)(#fn), (data), &(fn) }
 
 KeychainAccessor* keychainAccessor;
+FREContext AirCtx = nil;
 
 DEFINE_ANE_FUNCTION( insertStringInKeychain )
 {
@@ -238,7 +241,7 @@ DEFINE_ANE_FUNCTION(mobileAppTrackerTrackClose)
     return NULL;
 }
 
-DEFINE_ANE_FUNCTION( mobileAppTrackerTrackInAppPurchase )
+DEFINE_ANE_FUNCTION(mobileAppTrackerTrackInAppPurchase)
 {
     NSString* localizedTitle;
     if( keychain_FREGetObjectAsString( argv[0], &localizedTitle ) != FRE_OK ) return NULL;
@@ -266,6 +269,78 @@ DEFINE_ANE_FUNCTION( mobileAppTrackerTrackInAppPurchase )
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION(sendTweet)
+{
+    NSString* message;
+    if( keychain_FREGetObjectAsString( argv[0], &message ) != FRE_OK ) return NULL;
+    
+    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    
+    // Set up the built-in twitter composition view controller.
+    TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+    
+    // Set the initial tweet text. See the framework for additional properties that can be set.
+    [tweetViewController setInitialText:message];
+    
+    // Create the completion handler block.
+    [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+        NSString *output;
+        
+        switch (result) {
+            case TWTweetComposeViewControllerResultCancelled:
+                // The cancel button was tapped.
+                output = @"CANCEL";
+                break;
+            case TWTweetComposeViewControllerResultDone:
+                // The tweet was sent.
+                output = @"DONE";
+                break;
+            default:
+                break;
+        }
+        
+        FREDispatchStatusEventAsync(AirCtx, (const uint8_t *)[output UTF8String], (const uint8_t *)[output UTF8String]);
+        
+        // Dismiss the tweet composition view controller.
+        [rootViewController dismissModalViewControllerAnimated:YES];
+    }];
+    
+    // Present the tweet composition view controller modally.
+    [rootViewController presentModalViewController:tweetViewController animated:YES];
+    
+    return NULL;
+}
+
+int canSendTweetInternal(void) {
+    BOOL result = NO;
+    
+    //On pre iOS 3.0 devices MFMailComposeViewController does not exists
+    Class mailClass = (NSClassFromString(@"TWTweetComposeViewController"));
+    if (mailClass != nil) {
+        // We must always check whether the current device is configured for sending emails
+        if ([TWTweetComposeViewController canSendTweet]) {
+            result = YES;
+        }
+        else {
+            result = NO;
+        }
+    }
+    //this will never happen since Adobe AIR requires at least iOS 4.0
+    else {
+        result = NO;
+    }
+    return (int)result;
+}
+        
+DEFINE_ANE_FUNCTION(canSendTweet)
+{
+    BOOL ret = canSendTweetInternal();
+    FREObject retVal;
+    
+    FRENewObjectFromBool(ret, &retVal);
+    return retVal;
+}
+
 void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet, const FRENamedFunction** functionsToSet )
 {
     static FRENamedFunction functionMap[] =
@@ -282,11 +357,15 @@ void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREConte
         MAP_FUNCTION( mobileAppTrackerTrackUpdate, NULL),
         MAP_FUNCTION( mobileAppTrackerTrackOpen, NULL),
         MAP_FUNCTION( mobileAppTrackerTrackClose, NULL),
-        MAP_FUNCTION( mobileAppTrackerTrackInAppPurchase, NULL)        
+        MAP_FUNCTION( mobileAppTrackerTrackInAppPurchase, NULL),
+        
+        MAP_FUNCTION( sendTweet, NULL),
+        MAP_FUNCTION( canSendTweet, NULL)
     };
     
 	*numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );
 	*functionsToSet = functionMap;
+    AirCtx = ctx;
 }
 
 void KeychainContextFinalizer( FREContext ctx )
