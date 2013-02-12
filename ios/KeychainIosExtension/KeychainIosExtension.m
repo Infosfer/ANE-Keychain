@@ -9,6 +9,8 @@
 #import "FlashRuntimeExtensions.h"
 #import "KeychainFRETypeConversion.h"
 #import "KeychainAccessor.h"
+#import "NotificationChecker.h"
+#import <objc/runtime.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 
@@ -341,10 +343,69 @@ DEFINE_ANE_FUNCTION(canSendTweet)
     return retVal;
 }
 
+void didReceiveLocalNotification(id self, SEL _cmd, UIApplication* application, UILocalNotification *notification)
+{
+    NSLog(@"didReceiveLocalNotification");
+    
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+        FREDispatchStatusEventAsync(AirCtx, (uint8_t*)[@"RETURNED_FROM_BKG_BY_NOTIFICATION" UTF8String], (uint8_t*)[@"RETURNED_FROM_BKG_BY_NOTIFICATION" UTF8String]);
+    }
+}
+
+void patchAirApplicationDelegate() {
+    NSLog(@"patchAirApplicationDelegate");
+    
+    id delegate = [[UIApplication sharedApplication] delegate];
+    
+    Class objectClass = object_getClass(delegate);
+    
+    NSString *newClassName = [NSString stringWithFormat:@"Custom_%@", NSStringFromClass(objectClass)];
+    Class modDelegate = NSClassFromString(newClassName);
+    if (modDelegate == nil) {
+        // this class doesn't exist; create it
+        // allocate a new class
+        modDelegate = objc_allocateClassPair(objectClass, [newClassName UTF8String], 0);
+        
+        SEL selectorToOverride2 = @selector(application:didReceiveLocalNotification:);
+        
+        // get the info on the method we're going to override
+        Method m2 = class_getInstanceMethod([KeychainAccessor class], selectorToOverride2);
+
+        // add the method to the new class
+        class_addMethod(modDelegate, selectorToOverride2, (IMP)didReceiveLocalNotification, method_getTypeEncoding(m2));
+   
+        // register the new class with the runtime
+        objc_registerClassPair(modDelegate);
+    }
+    // change the class of the object
+    object_setClass(delegate, modDelegate);
+}
+
+DEFINE_ANE_FUNCTION(initExtension)
+{
+    BOOL appLaunchedWithNotification = [NotificationChecker applicationWasLaunchedWithNotification];
+    if(appLaunchedWithNotification)
+    {
+        //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        
+        // UILocalNotification *notification = [NotificationChecker getLocalNotification];
+        //NSString *type = [notification.userInfo objectForKey:@"type"];
+        
+        FREDispatchStatusEventAsync(AirCtx, (uint8_t*)[@"LAUNCHED_BY_NOTIFICATION" UTF8String], (uint8_t*)[@"LAUNCHED_BY_NOTIFICATION" UTF8String]);
+    }
+    
+    [NotificationChecker setAirCtx:AirCtx];
+    
+    return NULL;
+}
+
 void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet, const FRENamedFunction** functionsToSet )
 {
+    NSLog(@"KeychainContextInitializer");
+    
     static FRENamedFunction functionMap[] =
     {
+        MAP_FUNCTION( initExtension, NULL ),
         MAP_FUNCTION( insertStringInKeychain, NULL ),
         MAP_FUNCTION( updateStringInKeychain, NULL ),
         MAP_FUNCTION( insertOrUpdateStringInKeychain, NULL ),
@@ -366,6 +427,8 @@ void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREConte
 	*numFunctionsToSet = sizeof( functionMap ) / sizeof( FRENamedFunction );
 	*functionsToSet = functionMap;
     AirCtx = ctx;
+    
+    patchAirApplicationDelegate();
 }
 
 void KeychainContextFinalizer( FREContext ctx )
@@ -375,7 +438,8 @@ void KeychainContextFinalizer( FREContext ctx )
 
 void KeychainExtensionInitializer( void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet ) 
 { 
-    extDataToSet = NULL;  // This example does not use any extension data. 
+    NSLog(@"KeychainExtensionInitializer");
+    extDataToSet = NULL;  // This example does not use any extension data.
     *ctxInitializerToSet = &KeychainContextInitializer;
     *ctxFinalizerToSet = &KeychainContextFinalizer;
     

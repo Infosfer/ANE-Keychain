@@ -19,6 +19,9 @@
 		B27D0356167B77F2004DDA44 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */; };
 		B27D0357167B77F2004DDA44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */; };
 		B27D12A916B81E6200028D44 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27D12A816B81E6200028D44 /* Twitter.framework */; };
+		B2B8C3B116CA964800C65561 /* NotificationChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B8C3AF16CA964800C65561 /* NotificationChecker.h */; };
+		B2B8C3B216CA964800C65561 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8C3B016CA964800C65561 /* NotificationChecker.m */; };
+		B2B8C3B516CA970A00C65561 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8C3B416CA970A00C65561 /* UIKit.framework */; };
 		B2C9225E167D36F900002492 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C9225D167D36F900002492 /* AdSupport.framework */; };
 		B2C92260167D370800002492 /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C9225F167D370800002492 /* MobileAppTracker.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +40,9 @@
 		B27D0353167B77F2004DDA44 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B27D0354167B77F2004DDA44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B27D12A816B81E6200028D44 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		B2B8C3AF16CA964800C65561 /* NotificationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationChecker.h; sourceTree = "<group>"; };
+		B2B8C3B016CA964800C65561 /* NotificationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationChecker.m; sourceTree = "<group>"; };
+		B2B8C3B416CA970A00C65561 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B2C9225D167D36F900002492 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		B2C9225F167D370800002492 /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B8C3B516CA970A00C65561 /* UIKit.framework in Frameworks */,
 				B27D12A916B81E6200028D44 /* Twitter.framework in Frameworks */,
 				B2C92260167D370800002492 /* MobileAppTracker.framework in Frameworks */,
 				B2C9225E167D36F900002492 /* AdSupport.framework in Frameworks */,
@@ -62,6 +69,7 @@
 		79AA01521552B7AE003F5640 = {
 			isa = PBXGroup;
 			children = (
+				B2B8C3B416CA970A00C65561 /* UIKit.framework */,
 				B27D12A816B81E6200028D44 /* Twitter.framework */,
 				B2C9225F167D370800002492 /* MobileAppTracker.framework */,
 				B2C9225D167D36F900002492 /* AdSupport.framework */,
@@ -74,6 +82,8 @@
 				79AA01751552BA61003F5640 /* KeychainFRETypeConversion.h */,
 				B241EFDA164175B900789849 /* KeychainAccessor.m */,
 				79099AD615E3C755002CD0DC /* KeychainFRETypeConversion.m */,
+				B2B8C3AF16CA964800C65561 /* NotificationChecker.h */,
+				B2B8C3B016CA964800C65561 /* NotificationChecker.m */,
 				79AA016E1552B983003F5640 /* KeychainIosExtension.m */,
 				79AA015F1552B7AF003F5640 /* Frameworks */,
 				79AA015E1552B7AF003F5640 /* Products */,
@@ -107,6 +117,7 @@
 				79AA01781552BA61003F5640 /* FlashRuntimeExtensions.h in Headers */,
 				79AA01791552BA61003F5640 /* KeychainFRETypeConversion.h in Headers */,
 				79AA017E1552C549003F5640 /* KeychainAccessor.h in Headers */,
+				B2B8C3B116CA964800C65561 /* NotificationChecker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +175,7 @@
 				79AA01701552B983003F5640 /* KeychainIosExtension.m in Sources */,
 				79099AD715E3C755002CD0DC /* KeychainFRETypeConversion.m in Sources */,
 				B241EFDB164175B900789849 /* KeychainAccessor.m in Sources */,
+				B2B8C3B216CA964800C65561 /* NotificationChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

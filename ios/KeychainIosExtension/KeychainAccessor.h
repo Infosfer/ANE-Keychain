@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Stick Sports Ltd. All rights reserved.
 //
 #import <Security/Security.h>
+#import "UIKit/UIApplication.h"
 
 @interface KeychainAccessor : NSObject
 
@@ -33,5 +34,6 @@
                              extraRevenue:(float)extraRevenue
                     transactionIdentifier:(NSString *)transactionIdentifier
                                 isSuccess:(int)isSuccess;
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *) notification;
 
 @end

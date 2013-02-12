@@ -229,4 +229,6 @@
     ];
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *) notification{}
+
 @end
