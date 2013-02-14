@@ -399,6 +399,34 @@ DEFINE_ANE_FUNCTION(initExtension)
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION(httpRequestSync)
+{
+    NSString* url;
+    if( keychain_FREGetObjectAsString( argv[0], &url ) != FRE_OK ) return NULL;
+    
+    NSURL *nsUrl = [NSURL URLWithString:url];
+    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:nsUrl];
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+    NSString *res;
+    
+    if (error) {
+        res = @"ERROR";
+    }
+    else {
+        res = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    
+    FREObject asValue;
+    if ( keychain_FRENewObjectFromString( res, &asValue ) == FRE_OK )
+    {
+        return asValue;
+    }
+    
+    return NULL;
+}
+
 void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet, const FRENamedFunction** functionsToSet )
 {
     NSLog(@"KeychainContextInitializer");
@@ -406,6 +434,7 @@ void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREConte
     static FRENamedFunction functionMap[] =
     {
         MAP_FUNCTION( initExtension, NULL ),
+        MAP_FUNCTION( httpRequestSync, NULL ),
         MAP_FUNCTION( insertStringInKeychain, NULL ),
         MAP_FUNCTION( updateStringInKeychain, NULL ),
         MAP_FUNCTION( insertOrUpdateStringInKeychain, NULL ),

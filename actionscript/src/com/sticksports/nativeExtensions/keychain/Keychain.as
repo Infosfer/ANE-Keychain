@@ -149,6 +149,12 @@ package com.sticksports.nativeExtensions.keychain
 			extensionContext.call("sendTweet", message);
 		}
 
+		public static function httpRequestSync( url : String) : void
+		{
+			initInternal();
+			extensionContext.call("httpRequestSync", url);
+		}
+
 		public static function canSendTweet() : Boolean
 		{
 			initInternal();
