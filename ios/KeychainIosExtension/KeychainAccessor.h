@@ -7,8 +7,9 @@
 //
 #import <Security/Security.h>
 #import "UIKit/UIApplication.h"
+#import "FlashRuntimeExtensions.h"
 
-@interface KeychainAccessor : NSObject
+@interface KeychainAccessor : NSObject <NSURLConnectionDelegate>
 
 -(OSStatus)insertObject:(NSString*)obj forKey:(NSString*)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
 -(OSStatus)updateObject:(NSString *)obj forKey:(NSString *)key kSecAttrAccessibleType:(NSString*)kSecAttrAccessibleType;
@@ -35,5 +36,6 @@
                     transactionIdentifier:(NSString *)transactionIdentifier
                                 isSuccess:(int)isSuccess;
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *) notification;
+-(void)setAirCtx:(FREContext)airCtx;
 
 @end

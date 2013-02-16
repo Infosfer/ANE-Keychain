@@ -11,7 +11,44 @@
 #import <UIKit/UIDevice.h>
 #import <StoreKit/SKPaymentTransaction.h>
 
+static FREContext AirCtx = nil;
+
 @implementation KeychainAccessor
+
+-(void)setAirCtx:(FREContext)airCtx
+{
+    AirCtx = airCtx;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"Did Receive Response");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    NSLog(@"Did Receive Data");
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"Did Fail With Error %@", error.localizedDescription);
+    
+    // release the connection, and the data object
+    [connection release];
+    
+    FREDispatchStatusEventAsync(AirCtx, (uint8_t*)[@"HTTP_REQUEST_ERROR" UTF8String], (uint8_t*)[@"HTTP_REQUEST_ERROR" UTF8String]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"Did Finish Loading");
+
+    // release the connection, and the data object
+    [connection release];
+
+    FREDispatchStatusEventAsync(AirCtx, (uint8_t*)[@"HTTP_REQUEST_SUCCESS" UTF8String], (uint8_t*)[@"HTTP_REQUEST_SUCCESS" UTF8String]);
+}
 
 -(NSMutableDictionary*)queryDictionaryForKey:(NSString*)key kSecAttrAccessibleTypeValue:(NSString*)kSecAttrAccessibleTypeValue
 {

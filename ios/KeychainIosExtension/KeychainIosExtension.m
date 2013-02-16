@@ -395,33 +395,44 @@ DEFINE_ANE_FUNCTION(initExtension)
     }
     
     [NotificationChecker setAirCtx:AirCtx];
+    [keychainAccessor setAirCtx:AirCtx];
     
     return NULL;
 }
 
-DEFINE_ANE_FUNCTION(httpRequestSync)
+DEFINE_ANE_FUNCTION(httpPostRequest)
 {
+    NSLog(@"httpPostRequest");
+
     NSString* url;
     if( keychain_FREGetObjectAsString( argv[0], &url ) != FRE_OK ) return NULL;
     
-    NSURL *nsUrl = [NSURL URLWithString:url];
-    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:nsUrl];
-    NSURLResponse * response = nil;
-    NSError * error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-    NSString *res;
+    NSString* data;
+    if( keychain_FREGetObjectAsString( argv[1], &data ) != FRE_OK ) return NULL;
+
+    NSLog(@"data: %@", data);
     
-    if (error) {
-        res = @"ERROR";
+    NSURL *nsUrl = [NSURL URLWithString:url];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:nsUrl];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    __block UIBackgroundTaskIdentifier bgTask = nil;
+    
+    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"bg task timeout. %u", bgTask);
+        [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+    }];
+    
+    NSLog(@"bg task identifier: %u", bgTask);
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:keychainAccessor];
+    
+    if (!conn) {
+        NSLog(@"Connection creation failed.");
+        FREDispatchStatusEventAsync(AirCtx, (uint8_t*)[@"HTTP_REQUEST_ERROR" UTF8String], (uint8_t*)[@"HTTP_REQUEST_ERROR" UTF8String]);
     }
     else {
-        res = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    }
-    
-    FREObject asValue;
-    if ( keychain_FRENewObjectFromString( res, &asValue ) == FRE_OK )
-    {
-        return asValue;
+        NSLog(@"Connection created successfully.");
     }
     
     return NULL;
@@ -434,7 +445,7 @@ void KeychainContextInitializer( void* extData, const uint8_t* ctxType, FREConte
     static FRENamedFunction functionMap[] =
     {
         MAP_FUNCTION( initExtension, NULL ),
-        MAP_FUNCTION( httpRequestSync, NULL ),
+        MAP_FUNCTION( httpPostRequest, NULL ),
         MAP_FUNCTION( insertStringInKeychain, NULL ),
         MAP_FUNCTION( updateStringInKeychain, NULL ),
         MAP_FUNCTION( insertOrUpdateStringInKeychain, NULL ),
